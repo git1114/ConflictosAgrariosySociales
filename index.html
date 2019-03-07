@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="css/Control.OSMGeocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/Control.OSMGeocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/ndicedemarginacinporentidadfederativa_0.js"></script>
+        <script src="data/SinComenzar_1.js"></script>
+        <script src="data/EnProceso_2.js"></script>
+        <script src="data/Solucionado_3.js"></script>
+        <script src="data/ConflictosAgrariosySociales_4.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:5
+        }).fitBounds([[13.5596742144,-119.200016761],[33.6910780889,-85.9179760297]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        L.control.locate().addTo(map);
+        var measureControl = new L.Control.Measure({
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 28
+        });
+        basemap0.addTo(map);
+        function setBounds() {
+        }
+        function pop_ndicedemarginacinporentidadfederativa_0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description'] !== null ? Autolinker.link(String(feature.properties['description'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Indice_de_marginacion'] !== null ? Autolinker.link(String(feature.properties['Indice_de_marginacion'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ndicedemarginacinporentidadfederativa_0_0(feature) {
+            switch(String(feature.properties['Indice_de_marginacion'])) {
+                case 'Muy Bajo':
+                    return {
+                pane: 'pane_ndicedemarginacinporentidadfederativa_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(75,247,12,1.0)',
+            }
+                    break;
+                case 'Bajo':
+                    return {
+                pane: 'pane_ndicedemarginacinporentidadfederativa_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(174,227,99,1.0)',
+            }
+                    break;
+                case 'Medio':
+                    return {
+                pane: 'pane_ndicedemarginacinporentidadfederativa_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,239,13,1.0)',
+            }
+                    break;
+                case 'Alto':
+                    return {
+                pane: 'pane_ndicedemarginacinporentidadfederativa_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,154,33,1.0)',
+            }
+                    break;
+                case 'Muy Alto':
+                    return {
+                pane: 'pane_ndicedemarginacinporentidadfederativa_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,9,1,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_ndicedemarginacinporentidadfederativa_0');
+        map.getPane('pane_ndicedemarginacinporentidadfederativa_0').style.zIndex = 400;
+        map.getPane('pane_ndicedemarginacinporentidadfederativa_0').style['mix-blend-mode'] = 'normal';
+        var layer_ndicedemarginacinporentidadfederativa_0 = new L.geoJson(json_ndicedemarginacinporentidadfederativa_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_ndicedemarginacinporentidadfederativa_0',
+            onEachFeature: pop_ndicedemarginacinporentidadfederativa_0,
+            style: style_ndicedemarginacinporentidadfederativa_0_0,
+        });
+        bounds_group.addLayer(layer_ndicedemarginacinporentidadfederativa_0);
+        map.addLayer(layer_ndicedemarginacinporentidadfederativa_0);
+        function pop_SinComenzar_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description'] !== null ? Autolinker.link(String(feature.properties['description'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SinComenzar_1_0() {
+            return {
+                pane: 'pane_SinComenzar_1',
+                shape: 'diamond',
+                radius: 14.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,5,1,1.0)',
+            }
+        }
+        map.createPane('pane_SinComenzar_1');
+        map.getPane('pane_SinComenzar_1').style.zIndex = 401;
+        map.getPane('pane_SinComenzar_1').style['mix-blend-mode'] = 'normal';
+        var layer_SinComenzar_1 = new L.geoJson(json_SinComenzar_1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_SinComenzar_1',
+            onEachFeature: pop_SinComenzar_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_SinComenzar_1_0(feature));
+            },
+        });
+        var cluster_SinComenzar_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_SinComenzar_1.addLayer(layer_SinComenzar_1);
+
+        bounds_group.addLayer(layer_SinComenzar_1);
+        cluster_SinComenzar_1.addTo(map);
+        function pop_EnProceso_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description'] !== null ? Autolinker.link(String(feature.properties['description'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EnProceso_2_0() {
+            return {
+                pane: 'pane_EnProceso_2',
+                shape: 'diamond',
+                radius: 14.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,246,69,1.0)',
+            }
+        }
+        map.createPane('pane_EnProceso_2');
+        map.getPane('pane_EnProceso_2').style.zIndex = 402;
+        map.getPane('pane_EnProceso_2').style['mix-blend-mode'] = 'normal';
+        var layer_EnProceso_2 = new L.geoJson(json_EnProceso_2, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_EnProceso_2',
+            onEachFeature: pop_EnProceso_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_EnProceso_2_0(feature));
+            },
+        });
+        var cluster_EnProceso_2 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_EnProceso_2.addLayer(layer_EnProceso_2);
+
+        bounds_group.addLayer(layer_EnProceso_2);
+        cluster_EnProceso_2.addTo(map);
+        function pop_Solucionado_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description'] !== null ? Autolinker.link(String(feature.properties['description'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Solucionado_3_0() {
+            return {
+                pane: 'pane_Solucionado_3',
+                shape: 'diamond',
+                radius: 14.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,204,0,1.0)',
+            }
+        }
+        map.createPane('pane_Solucionado_3');
+        map.getPane('pane_Solucionado_3').style.zIndex = 403;
+        map.getPane('pane_Solucionado_3').style['mix-blend-mode'] = 'normal';
+        var layer_Solucionado_3 = new L.geoJson(json_Solucionado_3, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Solucionado_3',
+            onEachFeature: pop_Solucionado_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_Solucionado_3_0(feature));
+            },
+        });
+        var cluster_Solucionado_3 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_Solucionado_3.addLayer(layer_Solucionado_3);
+
+        bounds_group.addLayer(layer_Solucionado_3);
+        cluster_Solucionado_3.addTo(map);
+        function pop_ConflictosAgrariosySociales_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description'] !== null ? Autolinker.link(String(feature.properties['description'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ConflictosAgrariosySociales_4_0() {
+            return {
+                pane: 'pane_ConflictosAgrariosySociales_4',
+                shape: 'diamond',
+                radius: 10.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,228,110,1.0)',
+            }
+        }
+        map.createPane('pane_ConflictosAgrariosySociales_4');
+        map.getPane('pane_ConflictosAgrariosySociales_4').style.zIndex = 404;
+        map.getPane('pane_ConflictosAgrariosySociales_4').style['mix-blend-mode'] = 'normal';
+        var layer_ConflictosAgrariosySociales_4 = new L.geoJson(json_ConflictosAgrariosySociales_4, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_ConflictosAgrariosySociales_4',
+            onEachFeature: pop_ConflictosAgrariosySociales_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_ConflictosAgrariosySociales_4_0(feature));
+            },
+        });
+        var cluster_ConflictosAgrariosySociales_4 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_ConflictosAgrariosySociales_4.addLayer(layer_ConflictosAgrariosySociales_4);
+
+        bounds_group.addLayer(layer_ConflictosAgrariosySociales_4);
+        cluster_ConflictosAgrariosySociales_4.addTo(map);
+        var osmGeocoder = new L.Control.OSMGeocoder({
+            collapsed: false,
+            position: 'topright',
+            text: 'Search',
+        });
+        osmGeocoder.addTo(map);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/ConflictosAgrariosySociales_4.png" /> Conflictos Agrarios y Sociales': cluster_ConflictosAgrariosySociales_4,'<img src="legend/Solucionado_3.png" /> Solucionado': cluster_Solucionado_3,'<img src="legend/EnProceso_2.png" /> En Proceso': cluster_EnProceso_2,'<img src="legend/SinComenzar_1.png" /> Sin Comenzar': cluster_SinComenzar_1,'Índice de marginación por entidad federativa<br /><table><tr><td style="text-align: center;"><img src="legend/ndicedemarginacinporentidadfederativa_0_MuyBajo0.png" /></td><td>Muy Bajo</td></tr><tr><td style="text-align: center;"><img src="legend/ndicedemarginacinporentidadfederativa_0_Bajo1.png" /></td><td>Bajo</td></tr><tr><td style="text-align: center;"><img src="legend/ndicedemarginacinporentidadfederativa_0_Medio2.png" /></td><td>Medio</td></tr><tr><td style="text-align: center;"><img src="legend/ndicedemarginacinporentidadfederativa_0_Alto3.png" /></td><td>Alto</td></tr><tr><td style="text-align: center;"><img src="legend/ndicedemarginacinporentidadfederativa_0_MuyAlto4.png" /></td><td>Muy Alto</td></tr></table>': layer_ndicedemarginacinporentidadfederativa_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
